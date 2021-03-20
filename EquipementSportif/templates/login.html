@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="main">
+
+    <section class="signup">
+        <!-- <img src="images/signup-bg.jpg" alt=""> -->
+        <div class="container">
+            <div class="signup-content">
+
+                <form method="post" id="signup-form" class="signup-form">
+                    <h2 class="form-title">Se connecter</h2>
+                    {% csrf_token %}
+                    {% for non_field_error in form.non_field_errors %}
+                    <p class="help is-danger">{{ non_field_error }}</p>
+                    {% endfor %}
+                    {% for field in form %}
+                    <br>
+                    <div class="field">
+
+                        {{ field }}
+                        {% for error in field.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <br>
+                        <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info form-submit"
+                                type="submit">
+                            Connexion
+                        </button>
+                    </div>
+
+                </form>
+
+
+                <p class="text-center"> Don't have an account? <a href="/register" target="blank"><strong>register
+                    here</strong></a>!</p>
+            </div>
+        </div>
+</div>
+</section>
+</div>
+</body>
+{% endblock %}
